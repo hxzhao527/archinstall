@@ -1210,6 +1210,9 @@ class Installer:
 				raise DiskError(f"Failed to install GRUB boot on {boot_partition.dev_path}: {err}")
 
 		try:
+			SysCommand(f'/usr/bin/arch-chroot {self.target} '
+			  f'mkdir -p {boot_dir}/grub'
+			)
 			SysCommand(
 				f'/usr/bin/arch-chroot {self.target} '
 				f'grub-mkconfig -o {boot_dir}/grub/grub.cfg'
